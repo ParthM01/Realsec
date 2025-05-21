@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RealSec</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/AvadhB.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            color: white;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+            background: #f8fafc;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-content {
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .about-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-grid + .service-grid {
+            margin-top: 30px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .infrastructure-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 30px;
+            margin-top: 40px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .infra-item {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+        }
+
+        .infra-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .infra-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .infra-item h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .infra-item p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card i {
+            font-size: 2rem;
+            color: #1a56db;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .service-card h3 {
+            color: #111827;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        } */
+
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 1.8rem;
+            color: #333;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        } */
+
+        /* nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        } */
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            /* nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            } */
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="images/RealSeclogo1.png" alt="RealSec Logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li>
+                    <a href="contacts.html">Contact</a>
+                    <button class="nav-toggle" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="about-hero">
+        <h1>About RealSec</h1>
+        <p>Securing the digital future with innovative cybersecurity solutions</p>
+    </div>
+
+    <section class="section">
+        <div class="section-container">
+            <!-- Story and Mission -->
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Our Story</h2>
+                    <p>RealSec is a leading provider of comprehensive security solutions, specializing in infrastructure development and security services. With years of experience, we have established ourselves as a trusted partner for businesses across various sectors.</p>
+                </div>
+                <div class="about-content">
+                    <h2>Our Mission</h2>
+                    <p>Our mission is to deliver exceptional security and infrastructure solutions that protect and empower our clients. We strive to set new standards in the industry through innovation, reliability, and unwavering commitment to excellence.</p>
+                </div>
+            </div>
+
+            <!-- Values Section -->
+            <div class="section-content">
+                <div class="section-title">
+                    <h2>Our Values</h2>
+                    <p class="section-subtitle">Core principles that guide our commitment to excellence</p>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security First</h3>
+                        <p>We prioritize security in everything we do, ensuring the highest standards of protection for our clients.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Innovation</h3>
+                        <p>We continuously evolve our solutions to stay ahead of emerging cyber threats.</p>
+                    </div>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Trust</h3>
+                        <p>We build lasting relationships based on transparency and reliability.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Excellence</h3>
+                        <p>We strive for excellence in our services and customer support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infrastructure Section -->
+            <div class="section-content">
+                <div class="section-title">
+                    <h2>Our Infrastructure Expertise</h2>
+                    <p class="section-subtitle">Comprehensive solutions for modern infrastructure needs</p>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-university"></i>
+                        <h3>ATM & Bank Infrastructure</h3>
+                        <p>Complete turnkey solutions including civil work, electrical systems, and security integration for ATM installations.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>EHV Substation Construction</h3>
+                        <p>State-of-the-art construction and maintenance of Extra High Voltage substations with optimal performance.</p>
+                    </div>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-store"></i>
+                        <h3>Retail Outlet Construction</h3>
+                        <p>Specialized in developing modern retail spaces with a focus on structural integrity and enhanced shopping experience.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-hard-hat"></i>
+                        <h3>Skilled Manpower Outsourcing</h3>
+                        <p>Deployment of trained professionals for substation operations, maintenance, and management services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>RealSec</h3>
+                <p>Your Trusted Security Partner</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 RealSecurity. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger menu functionality
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.querySelector('i').classList.toggle('fa-bars');
+                this.querySelector('i').classList.toggle('fa-times');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    navToggle.querySelector('i').classList.add('fa-bars');
+                    navToggle.querySelector('i').classList.remove('fa-times');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
