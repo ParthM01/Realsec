@@ -15,7 +15,7 @@
             --nav-bg: rgba(255, 255, 255, 0.95);
         }
 
-        header {
+        /* header {
             position: fixed;
             top: 0;
             left: 0;
@@ -23,21 +23,21 @@
             z-index: 1000;
             background: var(--nav-bg);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+        } */
 
-        nav {
+        /* nav {
             max-width: 1200px;
             margin: 0 auto;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
+        } */
 
-        .logo img {
+        /* .logo img {
             height: 40px;
             width: auto;
-        }
+        } */
 
         .nav-links {
             display: flex;
@@ -62,6 +62,7 @@
         .about-hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/AvadhB.jpeg');
             background-size: cover;
+            background-repeat: no-repeat;
             background-position: center;
             padding: 180px 0 100px;
             color: white;
@@ -111,7 +112,7 @@
 
         .about-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 30px;
             margin-bottom: 80px;
         }
@@ -125,7 +126,7 @@
 
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 30px;
             margin-top: 40px;
         }
@@ -318,12 +319,12 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html"><img src="images/RealSeclogo1.png" alt="RealSec Logo"></a>
+                <a href="index.html"><img src="images/AvadhB-removebg-preview.png" alt="AvadhB Logo"></a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="index.html#about">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li>
                     <a href="contacts.html">Contact</a>
                     <button class="nav-toggle" aria-label="Toggle navigation">
@@ -334,7 +335,7 @@
         </nav>
     </header>
     <div class="about-hero">
-        <h1>About RealSec</h1>
+        <h1>About Us</h1>
         <p>Securing the digital future with innovative cybersecurity solutions</p>
     </div>
 
@@ -344,11 +345,11 @@
             <div class="about-grid">
                 <div class="about-content">
                     <h2>Our Story</h2>
-                    <p>RealSec is a leading provider of comprehensive security solutions, specializing in infrastructure development and security services. With years of experience, we have established ourselves as a trusted partner for businesses across various sectors.</p>
+                    <p>At Avadh Business Services I Pvt Ltd, our mission is to deliver exceptional electrical contracting solutions that meet the evolving needs of modern infrastructure. Established in July 2022, we have earned a strong reputation across India for our reliability, technical expertise, and commitment to safety. We are dedicated to staying at the forefront of the industry by embracing innovative technologies and best practices, ensuring timely, cost-effective, and high-quality project execution. Our goal is to consistently exceed client expectations while upholding the highest standards of professionalism and safety.</p>
                 </div>
                 <div class="about-content">
                     <h2>Our Mission</h2>
-                    <p>Our mission is to deliver exceptional security and infrastructure solutions that protect and empower our clients. We strive to set new standards in the industry through innovation, reliability, and unwavering commitment to excellence.</p>
+                    <p>Our vision is to build lasting relationships by consistently delivering reliable services that truly meet the needs of our clients. We believe that the quality of our work speaks for itself and will continue to define our reputation for years to come. Through unwavering commitment to excellence, we aim to be a trusted name in the electrical contracting industry—valued not just for what we do, but for how we do it.</p>
                 </div>
             </div>
 
@@ -358,31 +359,58 @@
                     <h2>Our Values</h2>
                     <p class="section-subtitle">Core principles that guide our commitment to excellence</p>
                 </div>
-                <div class="service-grid">
+                <!-- <div class="service-grid">
                     <div class="service-card">
                         <i class="fas fa-shield-alt"></i>
                         <h3>Security First</h3>
                         <p>We prioritize security in everything we do, ensuring the highest standards of protection for our clients.</p>
+                    </div> -->
+                  
+                </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Safety</h3>
+                        <p>We prioritize the health and safety of our people, partners, and clients in every project we undertake.</p>
                     </div>
                     <div class="service-card">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>Innovation</h3>
-                        <p>We continuously evolve our solutions to stay ahead of emerging cyber threats.</p>
+                        <i class="fas fa-handshake"></i>
+                        <h3>Respect</h3>
+                        <p>We foster a culture of mutual respect, valuing diverse perspectives and treating everyone with dignity.</p>
                     </div>
                 </div>
                 <div class="service-grid">
                     <div class="service-card">
-                        <i class="fas fa-handshake"></i>
-                        <h3>Trust</h3>
-                        <p>We build lasting relationships based on transparency and reliability.</p>
+                        <i class="fas fa-bolt"></i>
+                        <h3>Responsiveness</h3>
+                        <p>We are committed to listening, adapting, and acting promptly to meet our clients' needs.</p>
                     </div>
                     <div class="service-card">
-                        <i class="fas fa-users"></i>
-                        <h3>Excellence</h3>
-                        <p>We strive for excellence in our services and customer support.</p>
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Creativity</h3>
+                        <p>We embrace innovation and continuously seek better ways to deliver effective and efficient solutions.</p>
                     </div>
                 </div>
-            </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Integrity</h3>
+                        <p>We conduct our business with honesty, transparency, and the highest ethical standards.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-flag"></i>
+                        <h3>Initiative</h3>
+                        <p>We empower our team to take ownership, be proactive, and drive positive change.</p>
+                    </div>
+                </div>
+                <!-- <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Teamwork</h3>
+                        <p>We believe that collaboration and shared goals are key to achieving excellence.</p>
+                    </div>
+                </div>
+            </div> -->
 
             <!-- Infrastructure Section -->
             <div class="section-content">
