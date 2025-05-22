@@ -490,6 +490,102 @@
         </div>
     </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu functionality
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (navToggle) {
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navToggle.querySelector('i').classList.add('fa-bars');
+                navToggle.querySelector('i').classList.remove('fa-times');
+            }
+        });
+    }
+
+    // Image gallery functionality
+    const galleries = document.querySelectorAll('.image-gallery');
+
+    galleries.forEach(gallery => {
+        const container = gallery.querySelector('.gallery-container');
+        const dots = gallery.querySelectorAll('.gallery-dot');
+        const prev = gallery.querySelector('.gallery-prev');
+        const next = gallery.querySelector('.gallery-next');
+        let currentIndex = 0;
+        let autoplayInterval;
+
+        function updateGallery() {
+            if (container) {
+                container.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % 3;
+                updateGallery();
+            }, 5000);
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayInterval);
+        }
+
+        if (dots) {
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateGallery();
+                    stopAutoplay();
+                    startAutoplay();
+                });
+            });
+        }
+
+        if (prev) {
+            prev.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + 3) % 3;
+                updateGallery();
+                stopAutoplay();
+                startAutoplay();
+            });
+        }
+
+        if (next) {
+            next.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % 3;
+                updateGallery();
+                stopAutoplay();
+                startAutoplay();
+            });
+        }
+
+        // Start autoplay
+        startAutoplay();
+
+        // Pause autoplay on hover
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoplay);
+            container.addEventListener('mouseleave', startAutoplay);
+        }
+
+        // Initial update
+        updateGallery();
+    });
+});</script>
 
     <footer>
         <div class="footer-content">
@@ -507,6 +603,5 @@
             <p>&copy; 2025 RealSecurity. All rights reserved.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
