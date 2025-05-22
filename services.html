@@ -275,16 +275,14 @@
             <div class="logo">
                 <a href="index.html"><img src="images/AvadhB-removebg-preview.png" alt="RealSec Logo"></a>
             </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">About</a></li>
-                <li>
-                    <a href="contacts.html">Contact</a>
-                    <button class="nav-toggle" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </li>
+                <li><a href="contacts.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -306,15 +304,15 @@
                     <div class="image-gallery">
                         <div class="gallery-container">
                             <div class="gallery-item">
-                                <img src="images/SecuirtyGuard.png" alt="ATM Infrastructure 1">
+                                <img src="images/Bank-3.png" alt="ATM Infrastructure 1">
                                 <div class="image-overlay"></div>
                             </div>
                             <div class="gallery-item">
-                                <img src="images/SecuirtyGuard.png" alt="ATM Infrastructure 2">
+                                <img src="images/Bank-1.png" alt="ATM Infrastructure 2">
                                 <div class="image-overlay"></div>
                             </div>
                             <div class="gallery-item">
-                                <img src="images/SecuirtyGuard.png" alt="ATM Infrastructure 3">
+                                <img src="images/Bank-2.png" alt="ATM Infrastructure 3">
                                 <div class="image-overlay"></div>
                             </div>
                         </div>
@@ -466,7 +464,7 @@
                                 <div class="image-overlay"></div>
                             </div>
                             <div class="gallery-item">
-                                <img src="images/SecuirtyGuard.png" alt="Technical Manpower 3">
+                                <img src="images/SMO-3.jpg" alt="Technical Manpower 3">
                                 <div class="image-overlay"></div>
                             </div>
                         </div>
@@ -492,67 +490,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hamburger menu functionality
-            const navToggle = document.querySelector('.nav-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            
-            navToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.querySelector('i').classList.toggle('fa-bars');
-                this.querySelector('i').classList.toggle('fa-times');
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    navToggle.querySelector('i').classList.add('fa-bars');
-                    navToggle.querySelector('i').classList.remove('fa-times');
-                }
-            });
-            const galleries = document.querySelectorAll('.image-gallery');
-
-            galleries.forEach(gallery => {
-                const container = gallery.querySelector('.gallery-container');
-                const dots = gallery.querySelectorAll('.gallery-dot');
-                const prev = gallery.querySelector('.gallery-prev');
-                const next = gallery.querySelector('.gallery-next');
-                let currentIndex = 0;
-
-                function updateGallery() {
-                    container.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === currentIndex);
-                    });
-                }
-
-                dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => {
-                        currentIndex = index;
-                        updateGallery();
-                    });
-                });
-
-                prev.addEventListener('click', () => {
-                    currentIndex = (currentIndex - 1 + 3) % 3;
-                    updateGallery();
-                });
-
-                next.addEventListener('click', () => {
-                    currentIndex = (currentIndex + 1) % 3;
-                    updateGallery();
-                });
-
-                // Auto-advance every 5 seconds
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % 3;
-                    updateGallery();
-                }, 5000);
-            });
-        });
-    </script>
 
     <footer>
         <div class="footer-content">
@@ -570,5 +507,6 @@
             <p>&copy; 2025 RealSecurity. All rights reserved.</p>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -38,7 +38,7 @@
             height: 40px;
             width: auto;
         } */
-
+/* 
         .nav-links {
             display: flex;
             gap: 2.5rem;
@@ -57,11 +57,11 @@
 
         .nav-links a:hover {
             color: var(--primary-color);
-        }
+        } */
 
         .about-hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/AvadhB.jpeg');
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             padding: 180px 0 100px;
@@ -246,20 +246,6 @@
         } */
 
         
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            font-size: 1.8rem;
-            color: #333;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
         /* nav ul {
             display: flex;
@@ -319,24 +305,23 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html"><img src="images/AvadhB-removebg-preview.png" alt="AvadhB Logo"></a>
+                <a href="index.html"><img src="images/AvadhB-removebg-preview.png" alt="RealSec Logo"></a>
             </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">About</a></li>
-                <li>
-                    <a href="contacts.html">Contact</a>
-                    <button class="nav-toggle" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </li>
+                <li><a href="contacts.html">Contact</a></li>
             </ul>
         </nav>
     </header>
     <div class="about-hero">
         <h1>About Us</h1>
-        <p>Securing the digital future with innovative cybersecurity solutions</p>
+        <p>Powering Progress with Reliable and Innovative Electrical Solutions.
+            At ABSIPL, we deliver safe, efficient, and cutting-edge electrical services that support India’s growing infrastructure needs.</p>
     </div>
 
     <section class="section">
@@ -462,28 +447,6 @@
             <p>&copy; 2025 RealSecurity. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hamburger menu functionality
-            const navToggle = document.querySelector('.nav-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            
-            navToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.querySelector('i').classList.toggle('fa-bars');
-                this.querySelector('i').classList.toggle('fa-times');
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    navToggle.querySelector('i').classList.add('fa-bars');
-                    navToggle.querySelector('i').classList.remove('fa-times');
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

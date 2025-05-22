@@ -232,16 +232,14 @@
             <div class="logo">
                 <a href="index.html"><img src="images/AvadhB-removebg-preview.png" alt="RealSec Logo"></a>
             </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">About</a></li>
-                <li>
-                    <a href="contacts.html">Contact</a>
-                    <button class="nav-toggle" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </li>
+                <li><a href="contacts.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -313,6 +311,40 @@
         </div>
     </section>
 
+    <section id="locate-us" class="locate-us">
+        <div class="section-header">
+            <h2>Locate Us</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="map-container">
+            <!-- <div class="map-info">
+                <h3>AVADH BUSINESS SERVICES I PVT LTD</h3>
+                <p>206, Globe Estate, Kalyan, New Kalyan Rd, Dombivli East, Thane, Maharashtra 421203</p>
+                <div class="rating">
+                    <span class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </span>
+                    <span class="rating-score">4.4</span>
+                    <span class="reviews">(10 reviews)</span>
+                </div>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps/dir//Globe+Estate,+C-9,+New+Kalyan+Rd,+MIDC,+Vikas+Naka,+Dombivli,+Maharashtra+421203" class="directions-btn" target="_blank">
+                        <i class="fas fa-directions"></i> Directions
+                    </a>
+                    <a href="https://maps.google.com/?q=Globe+Estate,+C-9,+New+Kalyan+Rd,+MIDC,+Vikas+Naka,+Dombivli,+Maharashtra+421203" class="view-larger-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> View larger map
+                    </a>
+                </div>
+            </div> -->
+            <div class="map-frame">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15069.655793784705!2d73.115086!3d19.220783!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7952135db7661%3A0x1337db62c7ef7a26!2sREAL%20SECURITY%20SERVICES%20I%20PRIVATE%20LIMITED!5e0!3m2!1sen!2sus!4v1747913703845!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
     <footer>
         <div class="footer-content">
             <div class="footer-info">
@@ -329,28 +361,6 @@
             <p>&copy; 2025 RealSecurity. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hamburger menu functionality
-            const navToggle = document.querySelector('.nav-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            
-            navToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.querySelector('i').classList.toggle('fa-bars');
-                this.querySelector('i').classList.toggle('fa-times');
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    navToggle.querySelector('i').classList.add('fa-bars');
-                    navToggle.querySelector('i').classList.remove('fa-times');
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
