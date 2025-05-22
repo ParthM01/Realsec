@@ -21,53 +21,89 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Services Slider
-    const servicesSlider = document.querySelector('.services-slider');
-    if (servicesSlider) {
-        const cards = servicesSlider.querySelectorAll('.service-card');
-        const prevBtn = document.querySelector('.services-slider-container .prev');
-        const nextBtn = document.querySelector('.services-slider-container .next');
+    const sliderContainer = document.querySelector('.services-slider-container');
+    const slider = document.querySelector('.services-slider');
+    
+    if (slider && sliderContainer) {
+        const cards = slider.querySelectorAll('.service-card');
+        const prevBtn = sliderContainer.querySelector('.prev');
+        const nextBtn = sliderContainer.querySelector('.next');
         const dotsContainer = document.querySelector('.slider-dots');
         
-        let currentIndex = 0;
-        const totalSlides = cards.length - 2; // Subtract visible cards (3) - 1
+        let currentIndex = 1; // Start at 1 because of cloned slide
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let lastTranslate = 0;
+        let animationFrame = null;
+
+        function getVisibleSlides() {
+            return window.innerWidth <= 768 ? 1 : window.innerWidth <= 992 ? 2 : 3;
+        }
+
+        function getSlideWidth() {
+            return 100 / getVisibleSlides();
+        }
+
+        function getMaxIndex() {
+            return cards.length - getVisibleSlides() - 1; // -1 for cloned slides
+        }
 
         // Create dots
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('button');
-            dot.classList.add('slider-dot');
-            dot.setAttribute('aria-label', `Slide ${i + 1}`);
-            dotsContainer.appendChild(dot);
-
-            dot.addEventListener('click', () => {
-                goToSlide(i);
-            });
+        if (dotsContainer) {
+            const totalDots = getMaxIndex() - 1;
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('slider-dot');
+                dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                dot.addEventListener('click', () => goToSlide(i + 1));
+                dotsContainer.appendChild(dot);
+            }
         }
 
-        const dots = dotsContainer.querySelectorAll('.slider-dot');
-        dots[0].classList.add('active');
+        function setSliderPosition(position, animate = true) {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
 
-        function updateSlider() {
-            servicesSlider.style.transform = `translateX(-${currentIndex * 33.333}%)`;
-            
+            slider.style.transition = animate ? 'transform 0.5s ease' : 'none';
+            slider.style.transform = `translateX(${position}%)`;
+            lastTranslate = position;
+        }
+
+        function updateSlider(animate = true) {
+            const position = -(currentIndex * getSlideWidth());
+            setSliderPosition(position, animate);
+
             // Update dots
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.slider-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex - 1);
+                });
+            }
 
-            // Update button states
-            if (prevBtn) prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-            if (nextBtn) nextBtn.style.opacity = currentIndex === totalSlides - 1 ? '0.5' : '1';
+            // Update buttons
+            if (prevBtn) {
+                prevBtn.disabled = currentIndex <= 1;
+                prevBtn.style.opacity = currentIndex <= 1 ? '0.5' : '1';
+            }
+            if (nextBtn) {
+                nextBtn.disabled = currentIndex >= getMaxIndex();
+                nextBtn.style.opacity = currentIndex >= getMaxIndex() ? '0.5' : '1';
+            }
         }
 
-        function goToSlide(index) {
-            currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-            updateSlider();
+        function goToSlide(index, animate = true) {
+            currentIndex = Math.max(1, Math.min(index, getMaxIndex()));
+            updateSlider(animate);
             resetAutoplay();
         }
 
+        // Navigation
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
+                if (currentIndex > 1) {
                     currentIndex--;
                     updateSlider();
                     resetAutoplay();
@@ -77,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
-                if (currentIndex < totalSlides - 1) {
+                if (currentIndex < getMaxIndex()) {
                     currentIndex++;
                     updateSlider();
                     resetAutoplay();
@@ -85,66 +121,88 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Touch and drag functionality
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-
+        // Touch/Mouse events
         function dragStart(e) {
+            if (e.type === 'touchstart') {
+                startPos = e.touches[0].clientX;
+            } else {
+                startPos = e.clientX;
+                e.preventDefault();
+            }
+
             isDragging = true;
-            startPos = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-            servicesSlider.style.transition = 'none';
+            slider.style.transition = 'none';
+            slider.style.cursor = 'grabbing';
+
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
         }
 
-        function drag(e) {
+        function dragMove(e) {
             if (!isDragging) return;
 
             e.preventDefault();
             const currentPosition = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
             const diff = currentPosition - startPos;
-            const movePercent = (diff / servicesSlider.offsetWidth) * 100;
-            
-            currentTranslate = -(currentIndex * 33.333) + movePercent;
-            servicesSlider.style.transform = `translateX(${currentTranslate}%)`;
+            const movePercent = (diff / sliderContainer.offsetWidth) * 100;
+
+            currentTranslate = lastTranslate + movePercent;
+            setSliderPosition(currentTranslate, false);
         }
 
         function dragEnd() {
             if (!isDragging) return;
-            
+
             isDragging = false;
-            servicesSlider.style.transition = 'transform 0.5s ease';
-            
-            const movePercent = currentTranslate + (currentIndex * 33.333);
-            
-            if (movePercent > 10 && currentIndex > 0) {
-                currentIndex--;
-            } else if (movePercent < -10 && currentIndex < totalSlides - 1) {
-                currentIndex++;
+            slider.style.cursor = 'grab';
+
+            const movePercent = currentTranslate - lastTranslate;
+            const threshold = 20;
+
+            if (Math.abs(movePercent) > threshold) {
+                if (movePercent > 0 && currentIndex > 1) {
+                    currentIndex--;
+                } else if (movePercent < 0 && currentIndex < getMaxIndex()) {
+                    currentIndex++;
+                }
             }
-            
+
             updateSlider();
             resetAutoplay();
         }
 
-        servicesSlider.addEventListener('mousedown', dragStart);
-        servicesSlider.addEventListener('touchstart', dragStart);
-        servicesSlider.addEventListener('mousemove', drag);
-        servicesSlider.addEventListener('touchmove', drag);
-        servicesSlider.addEventListener('mouseup', dragEnd);
-        servicesSlider.addEventListener('touchend', dragEnd);
-        servicesSlider.addEventListener('mouseleave', dragEnd);
+        // Event listeners
+        slider.addEventListener('mousedown', dragStart);
+        slider.addEventListener('touchstart', dragStart, { passive: true });
+        window.addEventListener('mousemove', dragMove);
+        window.addEventListener('touchmove', dragMove, { passive: false });
+        window.addEventListener('mouseup', dragEnd);
+        window.addEventListener('touchend', dragEnd);
+        window.addEventListener('mouseleave', dragEnd);
 
-        // Prevent context menu on long press
-        servicesSlider.addEventListener('contextmenu', (e) => e.preventDefault());
+        // Prevent context menu
+        slider.addEventListener('contextmenu', (e) => e.preventDefault());
 
+        // Handle resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                currentIndex = Math.min(currentIndex, getMaxIndex());
+                updateSlider();
+            }, 100);
+        });
+
+        // Autoplay
         let autoplayInterval;
 
         function startAutoplay() {
             autoplayInterval = setInterval(() => {
-                if (currentIndex < totalSlides - 1) {
+                if (currentIndex < getMaxIndex()) {
                     currentIndex++;
                 } else {
-                    currentIndex = 0;
+                    goToSlide(1, false);
                 }
                 updateSlider();
             }, 5000);
@@ -155,17 +213,14 @@ document.addEventListener('DOMContentLoaded', function() {
             startAutoplay();
         }
 
-        // Pause autoplay on hover
-        servicesSlider.addEventListener('mouseenter', () => {
-            clearInterval(autoplayInterval);
-        });
+        // Pause autoplay on hover/touch
+        slider.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+        slider.addEventListener('touchstart', () => clearInterval(autoplayInterval));
+        slider.addEventListener('mouseleave', startAutoplay);
+        slider.addEventListener('touchend', startAutoplay);
 
-        servicesSlider.addEventListener('mouseleave', () => {
-            startAutoplay();
-        });
-
-        // Initial setup
-        updateSlider();
+        // Initialize
+        updateSlider(false);
         startAutoplay();
     }
 
